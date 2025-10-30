@@ -1,6 +1,6 @@
 # Ex-1 IMPLEMENTATION-OF-SYMBOL-TABLE
-# Register Number :
-# Date : 
+# Register Number :212223220081
+# Date : 30.10.2005
 # AIM :
 ## To write a C program to implement a symbol table.
 # ALGORITHM
@@ -13,6 +13,66 @@
 7.	To reach a variable, enter the variable to be searched and the symbol table has been checked for the corresponding variable, the variable along with its address is displayed as a result.
 8.	Stop the program. 
 # PROGRAM
+```
+#include<stdio.h>
+#include<ctype.h>
+#include<string.h>
+#include<stdlib.h>
+#define MAX_EXPRESSION_SIZE 100
+int main()
+{
+    int i = 0, j = 0, x = 0, n, flag = 0;
+    void *add[5]; // Array to store addresses
+    char b[MAX_EXPRESSION_SIZE], d[5], c, srch;
+    printf("Enter the Expression terminated by $: ");
+    while ((c = getchar()) != '$' && i < MAX_EXPRESSION_SIZE - 1) {
+        b[i++] = c;
+    }
+    b[i] = '\0';
+    n = i;
+    printf("Given Expression: %s\n", b);
+    printf("\nSymbol Table\n");
+    printf("Symbol\taddr\ttype\n");
+    for (j = 0; j < n; j++) {
+        c = b[j];
+        if (isalpha((unsigned char)c)) {
+            if (j == n - 1 || !isalpha(b[j + 1])) {
+                void *p = malloc(sizeof(char));
+                add[x] = p;
+                d[x] = c;
+                printf("%c\t%p\tidentifier\n", c, p);
+                x++;
+            }
+        }
+    }
+    getchar();
+    printf("\nThe symbol to be searched: ");
+    srch = getchar();
+    for (i = 0; i < x; i++) {
+        if (srch == d[i]) {
+            printf("Symbol Found\n");
+            printf("%c@address %p\n", srch, add[i]);
+            flag = 1;
+            break;
+        }
+    }
+    if (flag == 0) {
+        printf("Symbol Not Found\n");
+    }
+    for (i = 0; i < x; i++) {
+        free(add[i]);
+    }
+    return 0;
+}
+```
 # OUTPUT
+<img width="774" height="469" alt="image" src="https://github.com/user-attachments/assets/4483eaa3-346a-4f20-8a75-c6dd59ba1c80" />
+
+
+<img width="868" height="449" alt="image" src="https://github.com/user-attachments/assets/971afa84-3ff3-4287-bfe1-5a9d4aa91411" />
+
+
+
+
 # RESULT
 ### The program to implement a symbol table is executed and the output is verified.
